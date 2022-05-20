@@ -1,6 +1,5 @@
-from secrets import choice
-from unicodedata import category
 from django.db import models
+from django.urls import reverse
 
 class Author(models.Model):
     firstname = models.CharField(max_length=200,blank=True,null=True)
@@ -47,4 +46,7 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('detail_url', kwargs={"pk_post":self.id})
 
