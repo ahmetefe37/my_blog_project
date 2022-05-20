@@ -1,0 +1,25 @@
+{% include "base/navbar.html" %}
+
+<section id="contentbody">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+            <table>
+                <tr><td><h1>DO YOU WANT TO DELETE THIS POST?</h1></td></tr>
+                <tr>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <td>
+                            <input class="btn btn-danger" type="submit" value="DELETE">
+                            <a class="btn btn-info" href="{% url 'post:home_url' %}">CANCEL</a>
+                        </td>
+                    </form>
+                </tr>
+            </table>
+            
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% include 'base/footer.html' %}

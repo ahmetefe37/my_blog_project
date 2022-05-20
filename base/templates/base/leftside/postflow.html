@@ -11,7 +11,11 @@
       <div class="stuff_article_inner"> 
         <span class="stuff_date">{{ post.date_created|date:"M" }} <strong>{{ post.date_created|date:"d" }}</strong></span>
         <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
-        <p>{{ post.content }}</p>
+        <p>{{ post.content|truncatechars:60 }}</p>
+      </div>
+      <div>
+        <a class="btn btn-info" href="{% url 'post:update_url' post.id %}">UPDATE</a>
+        <a class="btn btn-danger" href="{% url 'post:delete_url' post.id%}">DELETE</a>
       </div>
     </div>
   </div>
