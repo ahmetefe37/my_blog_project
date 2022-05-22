@@ -8,7 +8,7 @@ class Author(models.Model):
     email = models.EmailField(max_length=200,blank=True,null=True)
     info = models.TextField(max_length=1000,blank=True,null=True)
     date_hired = models.DateTimeField(auto_now_add=True,blank=True,null=True)
-    #profil_picture = models.ImageField(blank=True,null=True)
+    profil_picture = models.ImageField(blank=True,null=True)
 
     def __str__(self):
         return self.firstname
@@ -42,11 +42,14 @@ class Post(models.Model):
     author = models.ForeignKey(Author,blank=True,null=True,on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     date_updated = models.DateTimeField(auto_now_add=True,blank=True,null=True)
-    #image_post = models.ImageField(blank=True,null=True)
+    image_post = models.ImageField(blank=True,null=True)
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
         return reverse('post:detail_url', kwargs={"pk_post_detail":self.id})
+
+    class Meta:
+        ordering = ('-date_created',)
 

@@ -4,8 +4,12 @@
 {% for post in posts %}
 
 <div class="single_stuff wow fadeInDown">
-  <div class="single_stuff_img"> <a href="{{ post.get_absolute_url }}"><img src="{% static 'images/stuff_img1.jpg' %}" alt=""></a> </div>
-  
+  <div class="single_stuff_img"> <a href="{{ post.get_absolute_url }}">
+
+    {% if psot.image_post %}
+    <img src="{{ post.image_post.url }}" alt="{{ post.title }}"></a> </div>
+    {% endif %}
+
   <div class="single_stuff_article">
     <div class="single_sarticle_inner"> <a class="stuff_category" href="#">{{ post.category }}</a>
       <div class="stuff_article_inner"> 
@@ -28,8 +32,5 @@
   <ul class="newstuff_pagnav">
     <li><a class="active_page" href="#">1</a></li>
     <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
   </ul>
 </div>

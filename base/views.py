@@ -14,7 +14,7 @@ def homepage(request):
 
 
 def createpage(request):
-    form = PostForm(request.POST or None)
+    form = PostForm(request.POST or None,request.FILES or None)
     if form.is_valid():
         form.save()
         return redirect("post:home_url")
@@ -24,7 +24,7 @@ def createpage(request):
 
 def updatepage(request,pk_post_update):
     post = Post.objects.get(id=pk_post_update)
-    form = PostForm(request.POST or None,instance=post)
+    form = PostForm(request.POST or None,request.FILES or None,instance=post)
     if form.is_valid():
         form.save()
         return redirect("post:home_url")

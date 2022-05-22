@@ -15,7 +15,11 @@
                 <a href="#" class="stuff_category">{{ post.category }}</a> 
                 <span class="stuff_date">{{ post.date_created|date:"M" }} <strong>{{ post.date_created|date:"d" }}</strong></span>
                 <h2><a href="#">{{ post.title }}</a></h2>
-                <img class="img-center" src="{% static 'images/hot_img1.jpg' %}" alt="">
+
+                {% if psot.image_post %}
+                  <img class="img-center" src="{{ post.image_post.url }}" alt="{{ post.title }}">
+                {% endif %}
+
                 <p>{{ post.content }} </p>
 
                 <!-- paginator -->
@@ -33,7 +37,7 @@
 
                 <!-- author -->
                 <div class="author"> 
-                  <a href="#"><img src="{% static 'images/100x100.jpg' %}" alt=""></a>
+                  <a href="#"><img src="{{ post.author.profil_picture.url }}" alt="{{ post.author.firstname }} {{ post.author.lastname }}"></a>
                   <div class="author_details">
                     <h3><a href="#">{{ post.author.firstname }} {{ post.author.lastname }}</a></h3>
                   </div>
