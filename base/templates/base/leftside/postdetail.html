@@ -16,11 +16,11 @@
                 <span class="stuff_date">{{ post.date_created|date:"M" }} <strong>{{ post.date_created|date:"d" }}</strong></span>
                 <h2><a href="#">{{ post.title }}</a></h2>
 
-                {% if psot.image_post %}
-                  <img class="img-center" src="{{ post.image_post.url }}" alt="{{ post.title }}">
+                {% if post.image_post %}
+                  <img class="img-center" style="height: auto;width: 100%;" src="{{ post.image_post.url }}" alt="{{ post.title }}">
                 {% endif %}
 
-                <p>{{ post.content }} </p>
+                <p>{{ post.content|safe }} </p>
 
                 <!-- paginator -->
                 <a href="#" class="btn btn-primary">Primary</a> <a href="#" class="btn btn-success">Success</a> <a href="#" class="btn btn-info">Info</a> <a href="#" class="btn btn-danger">Danger</a> <a href="#" class="btn yellow_btn">Yellow</a> <a href="#" class="btn blue_btn">Blue</a> <a href="#">link</a>
@@ -37,7 +37,10 @@
 
                 <!-- author -->
                 <div class="author"> 
-                  <a href="#"><img src="{{ post.author.profil_picture.url }}" alt="{{ post.author.firstname }} {{ post.author.lastname }}"></a>
+                  {% if post.author.profil_picture %}
+                    <a href="#"><img src="{{ post.author.profil_picture.url }}" alt="{{ post.author.firstname }} {{ post.author.lastname }}">
+                    </a>
+                  {% endif %}
                   <div class="author_details">
                     <h3><a href="#">{{ post.author.firstname }} {{ post.author.lastname }}</a></h3>
                   </div>

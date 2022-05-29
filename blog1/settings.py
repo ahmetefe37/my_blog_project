@@ -41,6 +41,8 @@ INSTALLED_APPS = [
 
     # third party modules
     "crispy_forms",
+    "ckeditor",
+    "django_filters",
 
     # my modules
     "base.apps.BaseConfig",
@@ -130,6 +132,8 @@ STATICFILES_DIRS = [
     path.join(BASE_DIR, 'static'),
 ]
 
+STATIC_ROOT = path.join(BASE_DIR, 'staticfiles/')
+
 MEDIA_URL = "/media/"
 
 MEDIA_ROOT = path.join(BASE_DIR,"media/")
@@ -141,3 +145,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CRISPY FORMS
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+#CKeditor
+CKEDITOR_JQUERY_URL = path.join(STATIC_URL,"js/jquery.min.js")
+CKEDITOR_CONFIGS = {
+    "default": {
+        # "toolbar":"full",
+        # "height":300,
+        "width":"100%",
+    },
+}

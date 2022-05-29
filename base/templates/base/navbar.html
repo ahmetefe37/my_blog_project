@@ -14,7 +14,7 @@
   font-family: 'Varela';
   font-style: normal;
   font-weight: 400;
-  src: local('Varela'), url(' static "fonts/Varela-400.woff"') format('woff');
+  src: local('Varela'), url('{% static "fonts/Varela-400.woff" %}') format('woff');
   }
 
   @font-face {
@@ -82,9 +82,17 @@
         </div>
       </div>
     </nav>
-    <form id="searchForm">
+
+    <!-- <nav id="searchForm" class="navbar navbar-light bg-light">
+      <form class="form-inline" method="GET">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <input type="submit" value="S">
+      </form>
+    </nav> -->
+
+    <form id="searchForm" method="GET">
       <input type="text" placeholder="Search...">
-      <input type="submit" value="">
     </form>
+
   </div>
 </header>

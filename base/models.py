@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.text import slugify
+from ckeditor.fields import RichTextField
 
 class Author(models.Model):
     firstname = models.CharField(max_length=200,blank=True,null=True)
@@ -35,7 +37,7 @@ class Post(models.Model):
     )
 
     title = models.CharField(max_length=200,blank=True,null=True)
-    content = models.TextField(max_length=5000,blank=True,null=True)
+    content = RichTextField(max_length=5000,blank=True,null=True)
     status = models.CharField(max_length=200,choices=STATUS,null=True)
     category = models.CharField(max_length=200,null=True,choices = CATEGOIRES)
     tags = models.ManyToManyField(Tag)
@@ -43,12 +45,26 @@ class Post(models.Model):
     date_created = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     date_updated = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     image_post = models.ImageField(blank=True,null=True)
+    slug = models.SlugField(unique=True,editable=False,max_length=210)
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('post:detail_url', kwargs={"pk_post_detail":self.id})
+        return reverse('post:detail_url', kwargs={"pk_slug_detail":self.slug})
+
+    def get_unique_slug(self):
+        slug = slugify(self.title.replace('ı','i'))
+        unique_slug = slug
+        counter = 1
+        while Post.objects.filter(slug=unique_slug).exists():
+            unique_slug = "{}-{}".format(slug,counter)
+            counter +=1
+        return unique_slug 
+
+    def save(self, *args, **kwargs):
+        self.slug = self.get_unique_slug()
+        return super(Post,self).save(*args,**kwargs)    
 
     class Meta:
         ordering = ('-date_created',)
